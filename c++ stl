@@ -132,4 +132,106 @@ void pq(){
 
 
 
+//set 
+void set(){ //sorted and unique
+    set<int>st ;
+    st.insert(1);//{1}
+    st.insert(2);//{1,2}
+    st.insert(2);//{1,2}//unique
+    st.insert(4);//{1,2,4}
+    st.insert(3);//{1,2,3,4}//sorted
+    
+    //{1,2,3,4,5}
+    auto it = st.find(3);//will return the address of 3
+    auto it = st.find(6);// if an element is not in the set, it will always return set.end() which points to right after the last element
+    
+    st.erase(5);//deletes 5
+    st.erase(it1,it2);//deletes a range of no.s does not delete upper bound
+    
+    int cnt = st.count(1);// if 1 is there it gives 1 otherwise 0
+}
+
+
+//multiset
+void multiset(){
+    //everything same as set but can store duplicates
+    multiset<int>ms;
+    //{1,1,1,1}
+    ms.erase(1);//deletes all 1
+    
+    int cnt = ms.count(1);
+    
+    ms.erase(ms.find(1));//erases only single 1
+    ms.erase(ms.find(1),ms.find(1)+2);//to erase a certain no. of 1s
+}
+
+
+//Uset or unordered set
+    //everything works same only lower and upper bound functions dont work
+
+
+//MAP
+void map(){//map keys unique keys in sorted order
+    map<int,int>m;
+    map<int,pair<int,int>>mp;
+    map< pair<int,int>,int>mpp;
+    
+    m[1]=2;
+    m.emplace({3,1});
+    m.insert({2,4});//({1,2},{2,4},{3,1})
+    
+    //to access elements
+    for(auto it : m){
+        cout<<it.first<<" "<<it.second<<endl;
+    }
+    
+    cout<<m[1];
+    cout<<m[5];
+    
+    auto it = m.find(3);
+    cout<< *(it).second;
+    
+    auto it=m.find(5);//gives m.end()
+    
+    
+    auto it= m.lower_bound(2);
+    
+    auto it= m.upper_bound(3);
+    //rest are all same
+}
+
+
+
+//multimap-//everything same as map but duplicate keys
+//unordered map- //same as set and unordered set difference
+
+
+//ALOGORYTHMS
+void extra(){
+    
+    sort(a,a + n);
+    sort(v.begin(), v.end());
+    
+    sort(a+2,a+4);
+    sort(a, a+n, greater<int>);
+    
+    pair<int,int> a[]= {{1,2},{2,1},{4,1}};
+    
+    sort(a, a+n, comp);
+    
+    int num=7;
+    int cnt= _bulletin_popcount();
+    
+    long long num = 2481246276584765;
+    int cnt= _bulletin_popcountll();
+    
+    string s = "123";
+    sort (s.begin(),s.end());
+    do{
+        cout<<s<<endl;
+    }while(nest_permutation(s.begin(),s.end()));
+    
+    int maxi = *max_element(a,a+n);
+}
+
 
