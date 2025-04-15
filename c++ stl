@@ -71,7 +71,7 @@ void vectors(){
     //size
     cout<<v.size()//7
     //
-    v.pod_back()//{50}
+    v.pop_back()//{50}
     
     
     
