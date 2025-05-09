@@ -189,9 +189,9 @@ void map(){//map keys unique keys in sorted order
     cout<<m[5];
     
     auto it = m.find(3);
-    cout<< *(it).second;
+    cout<< it->second; //important to note usage of it in this case
     
-    auto it=m.find(5);//gives m.end()
+    auto it=m.find(5); //gives m.end()
     
     
     auto it= m.lower_bound(2);
