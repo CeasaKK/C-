@@ -1,0 +1,326 @@
+ques 1 -   Problem statement: You are given a sorted array of integers and a target, your task is to search for the target in the given array. Assume the given array does not contain any duplicate numbers. Let’s say the given array is = {3, 4, 6, 7, 9, 12, 16, 17} and target = 6.
+Ans- 
+                                class Solution{
+                                public:
+                                    int findit(vector<int> &nums,int low,int high,int target){
+                                            int mid= (low+high)/2;
+                                            if (target==nums[mid]) return mid;
+                                            else if (high<=low) return -1;
+                                            else if(target > nums[mid]) return findit(nums,mid+1,high,target);
+                                            else return findit(nums,low,mid-1,target);
+                                        }
+                                    
+                                    int search(vector<int> &nums, int target){
+                                        int low,high;
+                                        low= 0;
+                                        high= nums.size()-1;
+                                
+                                        return findit(nums,low,high,target);
+                                    }
+                                };
+
+
+ques 9- Problem Statement: Given an integer array arr of size N, sorted in ascending order (may contain duplicate values) and a target value k. Now the array is rotated at some pivot point unknown to you. Return True if k is present and otherwise, return False. 
+
+sol-
+                              class Solution {
+                              public:
+                                  bool findit(vector<int> &nums,int low,int high,int target){
+                                          int mid= (low+high)/2;
+                                          if (target==nums[mid]) return true;
+                                          else if (high<=low) return false;
+                                          else if(target > nums[mid]) return findit(nums,mid+1,high,target);
+                                          else return findit(nums,low,mid-1,target);
+                                      }
+                                 
+                                 
+                                  bool breakit(vector<int> &nums, int low, int high, int target){
+                                      int mid=(low+high)/2;
+                                      if (target==nums[low] or target==nums[mid] or target==nums[high]){return true;}
+                                      while (nums[low]==nums[mid]&& nums[mid]==nums[high]){
+                                              low+=1;
+                                              high-=1;
+                                          }
+                                      if (nums[low]<=nums[mid] && target>=nums[low]&& target<=nums[mid]){
+                                              return findit(nums,low,mid,target);
+                                          }
+                                      else if (nums[mid]<=nums[high] && target>=nums[mid]&& target<=nums[high])return findit(nums,mid,high,target);
+                                      else if (nums[low]>nums[mid]){ return breakit(nums,low,mid,target);}
+                                      else if (nums[mid]>nums[high]){return breakit(nums,mid,high,target);}
+                                      else return false;
+                              
+                                  }
+                                  bool search(vector<int>& nums, int target) {
+                                      int low =0;
+                                      int high= nums.size()-1;
+                                      return breakit(nums,low,high,target);
+                              
+                              
+                                  }
+                              };
+ques-Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
+
+[4,5,6,7,0,1,2] if it was rotated 4 times.
+[0,1,2,4,5,6,7] if it was rotated 7 times.
+Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
+
+Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+
+You must write an algorithm that runs in O(log n) time.
+soln.-
+                                  class Solution {
+                                  public:
+                                  int chutiyaques(vector<int> &nums,int low,int high, int ans){
+                                              int mid=(low+high)/2;
+                                              if(low>=high) {
+                                                  if (nums[low]<nums[ans]) return nums[low];
+                                                  else return nums[ans];
+                                          }
+                                              if(nums[low]<=nums[mid]){
+                                                  if (nums[low]<nums[ans]) {ans= low;}
+                                                  return chutiyaques(nums,mid+1,high,ans);
+                                              }
+                                              else if (nums[high]>=nums[mid]){
+                                                  if (nums[mid]<nums[ans])ans=mid;
+                                                  return chutiyaques(nums,low,mid-1,ans);
+                                              }
+                                              else if (nums[low]>=nums[mid]&&nums[low]>=nums[high]){
+                                                  if(nums[high]<=nums[mid])return -1000;
+                                                  else{
+                                                      if (nums[mid]<nums[ans])ans=mid;
+                                                      return chutiyaques(nums,low,mid-1,ans);}
+                                              }
+                                              else {return -999;}
+                                                  
+                                              }
+                                  
+                                      int findMin(vector<int>& nums) {
+                                          int ans=0;
+                                          return chutiyaques(nums,0,(nums.size()-1),ans);
+                                      }
+                                  };
+
+
+ques-Given an array nums sorted in non-decreasing order. Every number in the array except one appears twice. Find the single number in the array.
+
+
+soln-
+                                class Solution {
+                                public:
+                                    int machuda(vector<int> &nums,int low,int high){
+                                        int mid=(low+high)/2;
+                                        
+                                        if(low>=high){if(nums[low]!=nums[low+1]&& nums[low]!=nums[low-1]){return nums[low];}
+                                        else return -1000;}
+                                
+                                        if(nums[high-1]!=nums[high])return nums[high];
+                                        if(nums[low+1]!=nums[low]) return nums[low];
+                                
+                                        if (nums[mid]!=nums[mid+1]&& nums[mid]!=nums[mid-1]){return nums[mid];}
+                                        
+                                        if(mid%2==0 && nums[mid]==nums[mid+1]){
+                                            return machuda(nums,mid+2,high);
+                                        }
+                                        else if(mid%2==0 && nums[mid]==nums[mid-1]){
+                                            return machuda(nums,low,mid-2);
+                                        }
+                                        else if(mid%2!=0 && nums[mid]==nums[mid+1]){
+                                            return machuda(nums,low,mid-2);
+                                        }
+                                        else{
+                                            return machuda(nums,mid+1,high);
+                                        }
+                                    }
+
+ques- Given a positive integer n. Find and return its square root. If n is not a perfect square, then return the floor value of sqrt(n).
+
+soln-
+                                        class Solution {
+                                        public:
+                                            int sqrt(long long n, long long low, long long high){
+                                                long long mid=(low+high)/2;
+                                                if (mid*mid==n) return mid;
+                                                if (high-low<=1){
+                                                    if((low*low)<n && ((low+1)*(low+1))>n)return low;
+                                                    else return low+1;
+                                                }
+                                                if (mid*mid<n){
+                                                    return sqrt(n,mid,high);
+                                                }
+                                                else if(mid*mid>n){
+                                                    return sqrt(n,low,mid);
+                                                }
+                                            }
+                                            long long floorSqrt(long long n)  {
+                                                long long low=1;
+                                                long long high=n-1;
+                                                if (n==1) return n;
+                                                return sqrt(n,low,high);
+                                            }
+                                        };
+                                    int singleNonDuplicate(vector<int>& nums) {
+                                        return machuda(nums,0,nums.size()-1);
+                                    }
+                                };
+
+
+ques-Given two numbers N and M, find the Nth root of M. The Nth root of a number M is defined as a number X such that when X is raised to the power of N, it equals M. If the Nth root is not an integer, return -1.
+soln-
+                                class Solution {
+                                public:
+                                  int exp(int N,int M, int low, int high){
+                                    int mid=(low+high)/2;
+                                    if ((high-low)<=1){
+                                      if(pow(low,N)==M)return low;
+                                      else if(pow(high,N)==M)return high;
+                                      else return -1;
+                                    }
+                                
+                                    if(pow(mid,N)==M)return mid;
+                                    else if(pow(mid,N)<M)return exp(N,M,mid,high);
+                                    else return exp(N,M,low,mid);
+                                
+                                  }
+                                  
+                                  int NthRoot(int N, int M) {
+                                       if (N==1 && M!=1) return M;
+                                       return exp(N,M,1,M-1);
+                                    }
+                                };
+
+
+
+ques- A monkey is given n piles of bananas, where the 'ith' pile has nums[i] bananas. An integer h represents the total time in hours to eat all the bananas. Each hour, the monkey chooses a non-empty pile of bananas and eats k bananas. If the pile contains fewer than k bananas, the monkey eats all the bananas in that pile and does not consume any more bananas in that hour. Determine the minimum number of bananas the monkey must eat per hour to finish all the bananas within h hours.
+soln-
+
+                                class Solution {
+                                public:
+                                int banana(vector<int> nums,int n, int h,int low, int high){
+                                    int sum=0;
+                                    int mid=(low+high)/2;
+                                    int ans=INT_MAX;
+                                    if (low>=high) {
+                                        if(ans>=low){
+                                            ans=low;
+                                            return ans;
+                                        }
+                                        else return -1000;}
+                                    else{
+                                    for (int i=0;i<n;i++){
+                                        if(nums[i]%mid==0){
+                                            sum+=(nums[i]/mid);
+                                        }
+                                        else sum+=(nums[i]/mid)+1;
+                                    }
+                                    }
+                                    cout<<"sum="<<sum<<"and mid="<<mid<<endl;
+                                    if (sum==h) {
+                                        if(ans>=mid)ans=mid;
+                                        return banana(nums,n,h,low,mid);
+                                    }
+                                    else if (sum>h)return banana(nums,n,h,mid+1,high);
+                                    else return banana(nums,n,h,low,mid);
+                                }
+                                
+                                
+                                int minEatingSpeed(vector<int> nums, int h) {
+                                    return banana(nums,nums.size(),h,1,INT_MAX/2);
+                                    }
+                                };
+
+
+ques- Given an array of integers nums and an integer limit as the threshold value, find the smallest positive integer divisor such that upon dividing all the elements of the array by this divisor, the sum of the division results is less than or equal to the threshold value.
+
+Each result of the division is rounded up to the nearest integer greater than or equal to that element.
+soln-
+
+                                class Solution {
+                                public:
+                                  int maxelem(vector<int> &nums){
+                                    int a=INT_MIN;
+                                    for (auto x: nums){
+                                      a=max(x,a);
+                                    }
+                                    return a;
+                                  }
+                                
+                                  int fin(vector<int> &nums,int limit,int low,int high){
+                                    int mid=(low+high)/2;
+                                    int sum=0;
+                                    if(low>high)return low;
+                                
+                                    for(int i=0;i<nums.size();i++){
+                                      sum+=ceil(((double)nums[i])/((double)mid));
+                                    }
+                                
+                                    if (sum<=limit){
+                                      return fin(nums,limit,low,mid-1);
+                                    }
+                                    else return fin(nums,limit,mid+1,high);
+                                  }
+                                
+                                  int smallestDivisor(vector<int> &nums, int limit) {
+                                       return fin(nums,limit,1,maxelem(nums));
+                                    }
+                                };
+
+
+ques- A conveyor belt has packages that must be shipped from one port to another within days days.
+
+The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
+
+Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days.
+
+
+soln-
+                                class Solution {
+                                public:
+                                    int maxelem(vector<int> &nums){
+                                        int a=INT_MIN;
+                                        for (auto x: nums){
+                                          a=max(x,a);
+                                       }
+                                      return a;
+                                    }
+                                    int sumelem(vector<int> &nums){
+                                        int a=0;
+                                        for (auto x: nums){
+                                          a+=x;
+                                       }
+                                      return a;
+                                    }
+                                    int boarding(vector<int>& nums, int days,int low,int high){
+                                        int day=1;
+                                        int sum=0;
+                                        int mid=(low+high)/2;
+                                        cout<<"mid is"<<mid;
+                                        int count=0;
+                                        if(low>high){
+                                            return low;
+                                        }
+                                        for (int i=0;i<nums.size();i++){
+                                            if((sum+nums[i])<=mid)sum+=nums[i];
+                                            else{
+                                                day+=1;
+                                                sum=nums[i];
+                                            }
+                                                cout<<" "<<"day is "<<day<<endl; 
+                                            }
+                                        if(day<=days){
+                                                cout<<" look at me"<<endl;
+                                                return boarding(nums,days,low,mid-1);}
+                                
+                                        return boarding(nums,days,mid+1,high);
+                                    }
+                                
+                                    int shipWithinDays(vector<int>& nums, int days) {
+                                        int day=0;
+                                        int sum=0;
+                                        int c=0;
+                                        int low=maxelem(nums);
+                                        int high=sumelem(nums);
+                                        cout<<low<<" "<<high<<endl;
+                                        return boarding(nums,days,low,high);
+                                
+                                    }
+                                };
