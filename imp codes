@@ -13,3 +13,12 @@ transpose of matrix//////////////////////////////////////////////////
             swap(matrix[i][j],matrix[j][i]);
         }
       }
+ncr////////////////////////////////////////////////////////////////
+        int ncr(int n,int r){
+                int ans=1;
+                for (int i=r+1;i<=n;i++){
+                    ans*=i;
+                    ans/=i-r;
+                }
+                return ans;
+            }
