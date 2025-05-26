@@ -1,0 +1,89 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+CREATION OF LINKEDLIST-
+
+class Node{
+    Public: // access modifier
+    int data; // the data value
+    Node* next; // the pointer to the next value
+    Public:
+    // constructor
+    Node (int data1, Node* next1){
+        data=data1;  // Initialize data with the provided value
+        next=next1;  // Initialize next with the provided
+    }
+    Node (int data1){
+        data=data1;  // Initialize data with the provided value
+        next=nullptr;  // Initialize next as null since it's the end of the list
+
+    }
+};
+int main(){
+    vector<int> arr={2,5,8,7};
+    Node* y= new Node(arr[0]);
+    cout<<y<<'\n'; // returns the memory value
+    cout<<y->data<<'\n'; // returns the data stored at that memory point
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+LENGTH OF LINKEDLIST-
+
+int lengthOfLinkedList(Node* head) {
+    Node* temp = head;
+    int cnt = 0;
+    // Traverse the linked list and count nodes
+    while (temp != NULL) {
+        temp = temp->next;
+        cnt++; // increment cnt for every node traversed
+    }
+    return cnt;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SEARCH AN ELEMENT-
+
+int checkifPresent(Node* head, int desiredElement) {
+    Node* temp = head;
+
+    // Traverse the linked list
+    while (temp != nullptr) {
+        // Check if the current node's data is equal to the desired element
+        if (temp->data == desiredElement)
+            return 1;  // Return 1 if the element is found
+
+        // Move to the next node
+        temp = temp->next;
+    }
+
+    return 0;  // Return 0 if the element is not found in the linked list
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DOUBLY LINKED LIST-
+
+class Node {
+public:
+    int data;       // Data stored in the node
+    Node* next;     // Pointer to the next node in the list (forward direction)
+    Node* back;     // Pointer to the previous node in the list (backward direction)
+
+    // Constructor for a Node with both data, a reference to the next node, and a reference to the previous node
+    Node(int data1, Node* next1, Node* back1) {
+        data = data1;
+        next = next1; // Similar to a singly linked list, but now with a 'back' pointer.
+        back = back1; // Addition of 'back' pointer for the doubly linked list.
+    }
+
+    // Constructor for a Node with data, and no references to the next and previous nodes (end of the list)
+    Node(int data1) {
+        data = data1;
+        next = nullptr; // Similar to a singly linked list.
+        back = nullptr; // Addition of 'back' pointer initialization.
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
