@@ -21,3 +21,33 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
         }
         return cnt;
     }
+
+//////// COMPARATOR USE
+ques-Given one meeting room and N meetings represented by two arrays, start and end, where start[i] represents the start time of the ith meeting and end[i] represents the end time of the ith meeting, determine the maximum number of meetings that can be accommodated in the meeting room if only one meeting can be held at a time.
+
+code-
+    bool comp(vector<int>v1,vector<int>v2){
+        if(v1[2]<v2[2])return true;
+        if(v1[2]>v2[2])return false;
+        if(v1[1]<v2[1])return true;
+        return false;
+    }
+class Solution{
+    public:
+
+    int maxMeetings(vector<int>& start, vector<int>& end){
+
+        vector<vector<int>>v;
+        for(int i=0;i<start.size();i++){
+            v.push_back({i,start[i],end[i]});
+        }
+        sort(v.begin(),v.end(),comp);
+        int cnt=1;
+        int end=v[0][2];
+        for(int i=1;i<start.size();i++){
+            if(end<=v[i][1]){cnt++;end=v[i][2];}
+        }
+        return cnt;
+        
+    }
+};
