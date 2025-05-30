@@ -87,3 +87,58 @@ public:
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+REVERSING A LINKEDLIST-
+
+    ListNode* reverseList(ListNode* head) {
+        if (head==nullptr)return head;
+        ListNode* temp=head;
+        ListNode* fwd=temp->next;
+        ListNode* prev=nullptr;
+        while(fwd!=nullptr){
+            temp->next=prev;
+            prev=temp;
+            temp=fwd;
+            fwd=fwd->next;
+        }
+        temp->next = prev;
+        head=temp;
+    return head;
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DELETE NODE-
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->val=node->next->val;
+        node->next=node->next->next;
+    }
+};    
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+MIDDLE NODE OF LINKEDLIST-
+
+    ListNode* middle(ListNode*head){
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next!=nullptr){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(fast->next->next==nullptr){
+                fast=fast->next;
+                slow=slow->next;
+            }
+        }
+        return slow;
+    }
