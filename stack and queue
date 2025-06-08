@@ -1,0 +1,158 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NGE(next greater element)  (NOT MOST OPTIMAL)
+
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        stack<int> st;
+        vector<int> ans(nums2.size());
+        for(int i=nums2.size()-1;i>=0;i--){
+            if(st.empty()){
+                ans[i]=-1;
+                st.push(nums2[i]);
+            }
+            else if(st.top()<=nums2[i]){
+                st.pop();
+                i++;
+                continue;
+            }
+            else if(st.top()>nums2[i]){
+                ans[i]=st.top();
+                st.push(nums2[i]);
+            }
+
+            
+            
+
+        }
+        for(auto x:ans){
+            cout<<x<<" ";
+        }
+        cout<<endl;
+        vector<int> final(nums1.size());
+        for(int i=0;i<nums1.size();i++){
+            for(int j=0;j<nums2.size();j++){
+                if(nums1[i]==nums2[j]){
+                    final[i]=ans[j];
+                }
+            }
+        }
+        return final;
+    }
+};
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+LRU(least recently used function)
+
+
+class Node{
+    public: // access modifier
+    pair<int,int> data; // the data value
+    Node* next;
+    Node* prev ;// the pointer to the next value
+    public:
+    // constructor
+    Node (pair<int,int> data1, Node* next1,Node* prev1){
+        data=data1;  // Initialize data with the provided value
+        next=next1;
+        prev=prev1 ; // Initialize next with the provided
+    }
+    Node (pair<int,int> data1){
+        data=data1;  // Initialize data with the provided value
+        next=nullptr;
+        prev=nullptr;  // Initialize next as null since it's the end of the list
+
+    }
+};
+class LRUCache {
+    private:
+    int a=0;
+    int cap=0;
+    Node* head=new Node({-1,-1});
+    Node* tail=new Node({-1,-1},nullptr,head);
+    
+    
+public:
+    LRUCache(int capacity) {
+        head->next=tail;
+        cap=capacity;
+        return;
+        
+        
+    }
+    
+    int get(int key) {
+        Node* temp=new Node({-1,-1});
+        temp=head->next;
+        
+        for(int i=0;i<a;i++){
+            if(temp->data.first==key){
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                head->next->prev=temp;
+                temp->next=head->next;
+                head->next=temp;
+                temp->prev=head;
+                
+                return temp->data.second;}
+            else {
+                temp=temp->next;
+                
+            }
+        }
+        return -1;
+    }
+    
+    void put(int key, int value) {
+        Node* temp=new Node({-1,-1});
+        temp=head->next;
+        for(int i=0;i<a;i++){
+            if(temp->data.first==key){
+                
+                temp->data.second=value;
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                temp->next=head->next;
+                temp->prev=head;
+                head->next=temp;
+                temp->next->prev=temp;
+                return;
+                }
+            else {
+                temp=temp->next;
+                
+            }
+        }
+        
+        Node* f=new Node({key,value},head->next,head);
+        head->next=f;
+        f->next->prev=f;
+        if(a<cap){a++;}
+        else{
+        tail->prev->prev->next=tail;
+        tail->prev->prev=tail->prev;}
+        return;
+
+    }
+};
+
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+
+
+
+
+
+ 
