@@ -33,13 +33,59 @@ public:
 
 Iterative-
 
+vector<int> p(TreeNode* root) {
+        vector<int>v;
+        stack<TreeNode*>s;
+        TreeNode* head=root;
+        if(root==nullptr)return {};
+        s.push(head);
+        while(!s.empty()){
+                head=s.top();
+                v.push_back(head->val);
+                s.pop();
+                if(head->right!=nullptr)s.push(head->right);
+                if(head->left!=nullptr)s.push(head->left);
+            
+        }
+        return v;
+    }
+
 ///////////////////////////////
 
 POST ORDER
 
 Recursion-
 
+void r(vector<int>& v,TreeNode* head){
+        if(head==nullptr)return;
+        r(v,head->left);
+        r(v,head->right);
+        v.push_back(head->val);
+    }
+
 Iterative-
+
+vector<int> twostack(TreeNode* root){
+        TreeNode* head=root;
+        stack<TreeNode*>s1,s2;
+        vector<int>v;
+        if(head==nullptr)return{};
+        s1.push(head);
+        while(!s1.empty()){
+            head=s1.top();
+            s1.pop();
+            s2.push(head);
+            if(head->left!=nullptr)s1.push(head->left);
+            if(head->right!=nullptr)s1.push(head->right);
+        }
+        while(!s2.empty()){
+            head=s2.top();
+            s2.pop();
+            v.push_back(head->val);
+        }
+        return v;
+
+    }
 
 ///////////////////////////////
 
@@ -47,7 +93,37 @@ INORDERED
 
 Recursion-
 
+void recurse(vector<int>&ans,TreeNode* head){
+        if(head==nullptr)return;
+         recurse(ans,head->left);
+        ans.push_back(head->val);
+        for(auto x:ans)cout<<x;
+        cout<<endl;
+         recurse(ans,head->right);
+       // return;
+    }
+
 Iterative-
+
+vector<int> i(TreeNode* root) { 
+        vector<int> v; 
+        stack<TreeNode*>s;
+        TreeNode* head= root;
+        while(true){
+            if(head!=nullptr){
+                s.push(head);
+                head=head->left;
+            }
+            else{
+                if(s.empty())break;
+                head=s.top();
+                s.pop();
+                v.push_back(head->val);
+                head=head->right;
+            }
+        }
+        return v;
+    }
 
 /////////////////////////////
 
