@@ -168,3 +168,15 @@ public:
 };
 
 ////////////////////////////////////
+
+
+HEIGHT OF A BINARY TREE
+
+code-
+    int optimal(TreeNode* head){
+        if(head==nullptr)return 0;
+        int lh=optimal(head->left);
+        int rh=optimal(head->right);
+        return 1+max(lh,rh);
+
+    }
