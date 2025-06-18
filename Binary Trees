@@ -1,6 +1,6 @@
 ///////////////////
 
-Preorder Traversal-
+Preorder Traversal- [HEAD, LEFT, RIGHT]
 
 Recursion-
 
@@ -52,7 +52,7 @@ vector<int> p(TreeNode* root) {
 
 ///////////////////////////////
 
-POST ORDER
+POST ORDER  [ LEFT, RIGHT, HEAD]
 
 Recursion-
 
@@ -89,7 +89,7 @@ vector<int> twostack(TreeNode* root){
 
 ///////////////////////////////
 
-INORDERED 
+INORDERED [LEFT, HEAD, RIGHT]
 
 Recursion-
 
